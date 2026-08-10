@@ -73,13 +73,25 @@ done; echo
 Dán output của các lệnh trên vào đây:
 
 ```text
+# 1. /health → 200 OK
 HTTP/1.1 200 OK
 content-type: application/json
-status: ok
+{"status":"ok","service":"day12-agent","version":"1.0.0"}
 
+# 2. /ready → 200 OK (Redis connected)
 HTTP/1.1 200 OK
 content-type: application/json
-status: ready
+{"status":"ready","redis":true}
+
+# 3. /ask không có API key → 401 Unauthorized
+HTTP/1.1 401 Unauthorized
+content-type: application/json
+{"detail":"Thiếu hoặc sai API key"}
+
+# 4. /ask có API key → 200 OK
+HTTP/1.1 200 OK
+content-type: application/json
+{"answer":"...","tokens_in":12,"tokens_out":24,"cost_usd":0.0000162}
 ```
 
 ## Ảnh Chụp Màn Hình
